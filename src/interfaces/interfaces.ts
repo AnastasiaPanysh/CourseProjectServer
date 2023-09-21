@@ -1,4 +1,4 @@
-interface iCourse {
+interface iReview {
   id?: number;
   title?: string;
   description?: string;
@@ -11,7 +11,13 @@ interface iUser {
   surname?: string;
   email?: string;
   pwd?: string;
+  [x: string]: any;
   role?: number;
+  provaider_name: string;
+  access_token: string;
+  refresh_token: string;
+  expiration_time: string;
+  firebase_uid: string;
 }
 
-export { iCourse, iUser };
+export { iReview, iUser };

@@ -1,10 +1,12 @@
 import express, { Request, Response, NextFunction } from "express";
 import user from "./controller/user.controller";
-import course from "./controller/review.controller";
+import review from "./controller/review.controller";
 import api from "./controller/api.controller";
 import bodyParser from "body-parser";
+import cors from "cors"; 
 
 const app = express();
+app.use(cors());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -13,7 +15,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 
 app.use("/user", user);
-app.use("/course", course);
+app.use("/review", review);
 app.use("/api", api);
 
 app.use(function (error, req: Request, res: Response, next: NextFunction) {
@@ -21,3 +23,4 @@ app.use(function (error, req: Request, res: Response, next: NextFunction) {
 });
 
 export default app;
+

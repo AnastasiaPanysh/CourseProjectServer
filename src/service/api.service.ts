@@ -6,29 +6,34 @@ import {
 import { iUser } from "../interfaces/interfaces";
 
 async function registrationUser(
-  name: string,
-  surname: string,
-  email: string,
-  pwd: string,
-  role: number
+  name,
+  email,
+  password,
+  role,
+  provaider_name,
+  access_token,
+  refresh_token,
+  expiration_time,
+  firebase_uid
 ): Promise<iUser[]> {
   const foundUser = await getUserByEmailDB(email);
   if (foundUser.length)
     throw new Error("there is already a user with this email.");
   const salt = await bcrypt.genSaltSync(10);
-  const hashPwd = await bcrypt.hashSync(pwd, salt);
-  return await registrationUserDB(name, surname, email, hashPwd, role);
+  const hashPwd = await bcrypt.hashSync(password, salt);
+  return await registrationUserDB(name, email, hashPwd, role,provaider_name,access_token,refresh_token,expiration_time,firebase_uid);
 }
 
-async function authorizationUser(email: string, pwd: string): Promise<iUser[]> {
+async function authorizationUser(
+  email,
+  password
+): Promise<iUser[]> {
   const foundUser = await getUserByEmailDB(email);
   if (!foundUser.length)
     throw new Error("user with this email does not exist.");
-  console.log(foundUser);
   console.log(foundUser[0]);
 
-  if (!(await bcrypt.compare(pwd, foundUser[0].pwd)))
-    throw new Error(" wrong password");
+  if (!(await bcrypt.compare(password, foundUser[0].password))) throw new Error(" wrong password");
 
   return foundUser;
 }

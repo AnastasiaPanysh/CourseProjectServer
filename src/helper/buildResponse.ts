@@ -1,7 +1,7 @@
 import { Response } from 'express';
-import { iCourse, iUser } from '../interfaces/interfaces';
+import { iReview, iUser } from '../interfaces/interfaces';
 
-function buildResponse(res: Response, status: number, message: string | iCourse[] | iUser[]) {
+function buildResponse(res: Response, status: number, message: string | iReview[] | iUser[]) {
   res.status(status);
   res.send(message);
 }

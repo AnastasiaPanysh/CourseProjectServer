@@ -1,15 +1,15 @@
-// import { config } from "dotenv";
-import { Pool } from "pg";
+import { config } from 'dotenv';
+import { Pool } from 'pg';
 
-// config();
-// const { USER_DB, HOST_DB, NAME_DB, PASSWORD_DB, PORT_DB } = process.env;
+config();
+const { USER_DB, HOST_DB, NAME_DB, PASSWORD_DB, PORT_DB } = process.env;
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'postgres',
-  database: 'postgres',
-  password:'fegaNaPa27_11',
-  port:'5432'
+  user: USER_DB,
+  host: HOST_DB,
+  database: NAME_DB,
+  password: PASSWORD_DB,
+  port: PORT_DB,
 });
 
-export default pool ;
+export default pool;

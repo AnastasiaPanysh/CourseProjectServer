@@ -7,9 +7,9 @@ const route = express.Router();
 
 route.post("/reg", async function (req: Request, res: Response) {
   try {
-    const { name, surname, email, pwd, role } = req.body;
-    await registrationUser(name, surname, email, pwd, role);
-    buildResponse(res, 200, "success");
+    const user = req.body;
+    const resp = await registrationUser(user.name, user.email, user.password, user.role,user.provaider_name, user.access_token,user.refresh_token,user.expiration_time,user.firebase_uid);
+    buildResponse(res, 200, resp);
   } catch (error: any) {
     handleError(res, 404, error);
   }
@@ -17,9 +17,9 @@ route.post("/reg", async function (req: Request, res: Response) {
 
 route.post("/auth", async function (req: Request, res: Response) {
   try {
-    const { email, pwd } = req.body;
-    await authorizationUser(email, pwd);
-    buildResponse(res, 200, "success");
+    const user = req.body;
+    const resp= await authorizationUser(user.email, user.password);
+    buildResponse(res, 200, resp);
   } catch (error: any) {
     handleError(res, 404, error);
   }
