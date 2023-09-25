@@ -10,18 +10,17 @@ async function registrationUser(
   email,
   password,
   role,
-  provaider_name,
-  access_token,
-  refresh_token,
-  expiration_time,
-  firebase_uid
+  provaiderName,
+  AccesToken,
+  ExpirationTime,
+  RefreshToken,
 ): Promise<iUser[]> {
   const foundUser = await getUserByEmailDB(email);
   if (foundUser.length)
     throw new Error("there is already a user with this email.");
   const salt = await bcrypt.genSaltSync(10);
   const hashPwd = await bcrypt.hashSync(password, salt);
-  return await registrationUserDB(name, email, hashPwd, role,provaider_name,access_token,refresh_token,expiration_time,firebase_uid);
+  return await registrationUserDB(name, email, hashPwd, role,provaiderName,AccesToken,ExpirationTime,RefreshToken);
 }
 
 async function authorizationUser(

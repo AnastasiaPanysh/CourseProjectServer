@@ -12,28 +12,26 @@ async function registrationUserDB(
   email,
   password,
   role,
-  provaider_name,
-  access_token,
-  refresh_token,
-  expiration_time,
-  firebase_uid
+  provaiderName,
+  AccesToken,
+  ExpirationTime,
+  RefreshToken,
 ): Promise<iUser[]> {
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
-    const sql = `INSERT INTO users( name, email, password, role, provaider_name,access_token,refresh_token,expiration_time,firebase_uid) 
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) returning *`;
+    const sql = `INSERT INTO users( name, email, password, role, provaider_name,access_token,expiration_time,refresh_token) 
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning *`;
     const data: iUser[] = (
       await client.query(sql, [
         name,
         email,
         password,
         role,
-        provaider_name,
-        access_token,
-        refresh_token,
-        expiration_time,
-        firebase_uid,
+        provaiderName,
+        AccesToken,
+        ExpirationTime,
+        RefreshToken,
       ])
     ).rows;
     await client.query("COMMIT");
